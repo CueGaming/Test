@@ -40,6 +40,7 @@
         const container = document.getElementById('container');
         const totalButtons = 300;
         let correctButtonIndex;
+        let consecutiveLKeyPresses = 0;
 
         function initializeButtons() {
             container.innerHTML = '';
@@ -66,7 +67,19 @@
             initializeButtons();
         }
 
+        function handleKeyPress(event) {
+            if (event.key === 'l' || event.key === 'L') {
+                consecutiveLKeyPresses++;
+                if (consecutiveLKeyPresses === 3) {
+                    window.location.href = 'hack.html';
+                }
+            } else {
+                consecutiveLKeyPresses = 0;
+            }
+        }
+
         initializeButtons();
+        document.addEventListener('keyup', handleKeyPress);
     </script>
 </body>
 </html>
