@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars Intro</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            background: black;
+            color: yellow;
+        }
+        .intro {
+            perspective: 400px;
+        }
+        .intro-text {
+            font-size: 20px;
+            text-align: justify;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: scroll 60s linear infinite;
+        }
+        @keyframes scroll {
+            0% {
+                top: 100%;
+                transform: translate(-50%, 100%) rotateX(20deg);
+            }
+            100% {
+                top: -100%;
+                transform: translate(-50%, -100%) rotateX(20deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="intro">
+        <div class="intro-text">
+            <p>A long time ago, in a galaxy far,<br> far away....</p>
+            <br><br>
+            <p>Episode IV<br>A NEW HOPE<br>It is a period of civil war....</p>
+            <!-- Add more text here -->
+        </div>
+    </div>
+</body>
+</html>
