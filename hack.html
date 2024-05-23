@@ -1,0 +1,10 @@
+function handleKeyPress(event) {
+    if (event.key === 'l' || event.key === 'L') {
+        consecutiveLKeyPresses++;
+        if (consecutiveLKeyPresses === 3) {
+            window.location.href = `hack.html?buttonIndex=${correctButtonIndex}`;
+        }
+    } else {
+        consecutiveLKeyPresses = 0;
+    }
+}
