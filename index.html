@@ -11,18 +11,17 @@
             font-family: Arial, sans-serif;
             background-color: #1e1e1e;
             color: white;
-            text-align: center;
         }
         .container {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-wrap: wrap;
             justify-content: center;
+            align-items: center;
             height: 100vh;
         }
         .button {
             padding: 10px 20px;
-            margin: 10px;
+            margin: 5px;
             background-color: #333;
             color: white;
             border: none;
@@ -32,73 +31,42 @@
         .button:hover {
             background-color: #555;
         }
-        .hint {
-            background-color: #3a3a3a;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        .speech-bubble {
-            position: relative;
-            display: inline-block;
-        }
-        .speech-bubble::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border: 10px solid transparent;
-            border-top-color: #3a3a3a;
-            border-bottom: 0;
-            margin-left: -10px;
-        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Button Guessing Game</h1>
-        <div class="speech-bubble" id="message"></div>
-        <button class="button" onclick="checkButton(this)">Button 1</button>
-        <button class="button" onclick="checkButton(this)">Button 2</button>
-        <button class="button" onclick="checkButton(this)">Button 3</button>
-        <button class="hint" onclick="provideHint()">Hint</button>
-    </div>
+    <div class="container" id="container"></div>
 
     <script>
-        const buttons = document.querySelectorAll('.button');
-        const messageBox = document.getElementById('message');
-        const correctButtonIndex = Math.floor(Math.random() * buttons.length);
-        let attempts = 3;
+        const container = document.getElementById('container');
+        const totalButtons = 300;
+        let correctButtonIndex;
 
-        function checkButton(button) {
-            if (button.textContent === `Button ${correctButtonIndex + 1}`) {
+        function initializeButtons() {
+            container.innerHTML = '';
+            for (let i = 0; i < totalButtons; i++) {
+                const button = document.createElement('button');
+                button.textContent = `Button ${i + 1}`;
+                button.classList.add('button');
+                button.addEventListener('click', () => checkButton(button, i));
+                container.appendChild(button);
+            }
+            correctButtonIndex = Math.floor(Math.random() * totalButtons);
+        }
+
+        function checkButton(button, index) {
+            if (index === correctButtonIndex) {
                 showMessage("You win! Congratulations!");
             } else {
-                attempts--;
-                if (attempts > 0) {
-                    showMessage("Wrong button! Try again.");
-                } else {
-                    showMessage("You lost! Refresh the page to try again.");
-                }
+                showMessage("Wrong button! Try again.");
             }
         }
 
         function showMessage(message) {
-            messageBox.textContent = message;
+            alert(message);
+            initializeButtons();
         }
 
-        function provideHint() {
-            buttons.forEach((button, index) => {
-                if (index === correctButtonIndex) {
-                    showMessage("Hot");
-                } else {
-                    showMessage("Cold");
-                }
-            });
-        }
+        initializeButtons();
     </script>
 </body>
 </html>
